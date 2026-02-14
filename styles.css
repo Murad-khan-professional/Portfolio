@@ -979,6 +979,8 @@ section { padding: var(--section-padding) 0; position: relative; overflow: hidde
 
 @media (max-width: 992px) {
     :root { --section-padding: 80px; }
+    .hero { min-height: auto; }
+    .scroll-indicator { display: none; }
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
     .nav-links.active {
