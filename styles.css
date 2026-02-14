@@ -695,7 +695,7 @@ section { padding: var(--section-padding) 0; position: relative; }
 .skill-progress { height: 100%; width: 0; background: var(--gradient-primary); border-radius: 3px; transition: width 1.5s ease; }
 
 /* Tech Stack */
-.tech-stack { text-align: center; padding: 50px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; }
+.tech-stack { text-align: center; padding: 50px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; overflow: visible; }
 .tech-stack h4 { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px; }
 .tech-icons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .tech-icon {
@@ -717,7 +717,7 @@ section { padding: var(--section-padding) 0; position: relative; }
 .tech-icon::after {
     content: attr(data-tooltip);
     position: absolute;
-    bottom: -35px;
+    top: -40px;
     left: 50%;
     transform: translateX(-50%);
     padding: 6px 12px;
@@ -729,6 +729,7 @@ section { padding: var(--section-padding) 0; position: relative; }
     opacity: 0;
     visibility: hidden;
     transition: var(--transition-fast);
+    z-index: 10;
 }
 .tech-icon:hover::after { opacity: 1; visibility: visible; }
 
