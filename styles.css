@@ -82,6 +82,7 @@ html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--accent-primary) var(--bg-secondary);
+    overflow-x: hidden;
 }
 
 html::-webkit-scrollbar { width: 8px; }
@@ -449,7 +450,7 @@ body:hover .cursor-glow { opacity: 1; }
 }
 
 /* SECTION STYLES */
-section { padding: var(--section-padding) 0; position: relative; }
+section { padding: var(--section-padding) 0; position: relative; overflow: hidden; }
 .section-header { margin-bottom: 60px; }
 .section-header.center { text-align: center; }
 .section-tag {
@@ -987,8 +988,7 @@ section { padding: var(--section-padding) 0; position: relative; }
     .hero-stats { justify-content: center; }
     .hero-image-wrapper { width: 300px; height: 300px; }
     .image-container { width: 250px; height: 250px; }
-    .about-content { grid-template-columns: 1fr; gap: 50px; text-align: center; }
-    .about-text { text-align: left; }
+    .about-content { grid-template-columns: 1fr; gap: 50px; }
     .about-img-wrapper { max-width: 350px; margin: 0 auto; }
     .experience-badge { right: 0; }
     .section-header { text-align: center; }
@@ -996,7 +996,8 @@ section { padding: var(--section-padding) 0; position: relative; }
     .contact-wrapper { grid-template-columns: 1fr; }
     .contact-info { text-align: center; }
     .contact-desc { margin-left: auto; margin-right: auto; }
-    .contact-details { display: inline-block; text-align: left; }
+    .contact-item { justify-content: center; }
+    .contact-text a, .contact-text span:not(.label) { word-break: break-all; }
     .social-links { justify-content: center; }
     .footer-content { grid-template-columns: 1fr 1fr; }
 }
@@ -1013,10 +1014,17 @@ section { padding: var(--section-padding) 0; position: relative; }
     .hero-cta { margin-bottom: 30px; }
     .hero-description { margin-bottom: 25px; }
     .contact-form .form-row { grid-template-columns: 1fr; }
-    .footer-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    .footer-brand p { margin-left: auto; margin-right: auto; }
+    /* Footer mobile */
+    .footer { padding: 50px 0 20px; }
+    .footer-content { grid-template-columns: 1fr; gap: 30px; text-align: center; margin-bottom: 30px; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; }
+    .footer-brand p { margin-left: auto; margin-right: auto; text-align: center; }
+    .footer-links, .footer-services { text-align: center; }
+    .footer-links h4, .footer-services h4 { margin-bottom: 15px; }
     .footer-links ul, .footer-services ul { text-align: center; }
-    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links a:hover, .footer-services a:hover { padding-left: 0; }
+    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+    .footer-bottom p { font-size: 0.8rem; }
 }
 
 @media (max-width: 480px) {
@@ -1031,7 +1039,9 @@ section { padding: var(--section-padding) 0; position: relative; }
     .btn { width: 100%; }
     .floating-card { display: none; }
     .tech-icon { width: 55px; height: 55px; font-size: 1.5rem; }
-    .contact-form-wrapper { padding: 25px; }
+    .contact-form-wrapper { padding: 20px; }
+    .contact-icon { width: 45px; height: 45px; }
+    .contact-text a, .contact-text span:not(.label) { font-size: 0.85rem; }
 }
 
 /* WHATSAPP FLOATING BUTTON */
