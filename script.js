@@ -347,28 +347,6 @@ const initParallax = () => {
     });
 };
 
-// WHATSAPP POPUP
-const initWhatsApp = () => {
-    const btn = document.getElementById('whatsappBtn');
-    const popup = document.getElementById('whatsappPopup');
-    const closeBtn = document.getElementById('whatsappClose');
-
-    btn.addEventListener('click', () => {
-        popup.classList.toggle('active');
-    });
-
-    closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        popup.classList.remove('active');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.whatsapp-float')) {
-            popup.classList.remove('active');
-        }
-    });
-};
-
 // INITIALIZE ALL
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
@@ -383,7 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticButtons();
     initTextReveal();
     initParallax();
-    initWhatsApp();
 });
 
 // Fallback if GSAP fails to load
