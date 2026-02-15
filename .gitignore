@@ -1,0 +1,7 @@
+# Original project folders with videos (too large for GitHub)
+projects/Project */
+projects/Project-*/
+*.mp4
+*.avi
+*.mov
+*.mkv
