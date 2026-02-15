@@ -1,3 +1,3 @@
 # Demo Video
 
-[Click here to watch the demo video](https://drive.google.com/open?id=1slh5_Ol6ETc7Bd5hjJdAoh10AP-tEvbB)
+[Click here to watch the demo video](https://drive.google.com/file/d/1K74EwAtc86C-zitvvlDDEuE2ivM_EukA/view?usp=sharing)
