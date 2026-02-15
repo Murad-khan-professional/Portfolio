@@ -28,7 +28,7 @@ A collection of 21 automation, AI, and data projects showcasing workflow automat
 | 8 | [GHL Team Call Analytics](./ghl-call-analytics) | n8n, GoHighLevel API, Google Sheets | [Watch Demo](https://drive.google.com/file/d/121VbrRzDytitxeCElFoDLJ4JoW3Jnp7_/view?usp=sharing) |
 | 9 | [GHL Owner Assignment & Sheet Sync](./ghl-owner-assignment-sync) | n8n, Google Sheets, GoHighLevel API | [Watch Demo](https://drive.google.com/file/d/1rypto70MfXMtjPVIHb2kxlmlXevU5rMg/view?usp=sharing) |
 | 10 | [Meta Ads to HubSpot Lead Sync](./meta-ads-hubspot-sync) | Zapier, Meta API, HubSpot, Slack | [Watch Demo](https://drive.google.com/file/d/1wx6BFZhMvh8B0OS2zyfujJxnijzyiW15/view?usp=sharing) |
-| 11 | [HubSpot Deal Event Router](./hubspot-deal-event-router) | n8n, HubSpot Webhooks, Slack | [Watch Demo](https://drive.google.com/file/d/1l-aCT8jPz0ANXvk_JTfuzumoukgI2yYp/view?usp=sharing) |
+| 11 | [HubSpot Deal Event Router](./hubspot-deal-event-router) | Zapier, HubSpot Webhooks, Slack | [Watch Demo](https://drive.google.com/file/d/1l-aCT8jPz0ANXvk_JTfuzumoukgI2yYp/view?usp=sharing) |
 | 12 | [WordPress to Pipedrive Leads](./wordpress-pipedrive-leads) | Zapier, WordPress, Pipedrive API | [Watch Demo](https://drive.google.com/file/d/1W4nWL5ybrcmyaQohLlhTBDJGpEmQA4GE/view?usp=sharing) |
 | 13 | [Notion Monthly KPI Automation](./notion-monthly-kpi-automation) | n8n, Notion API, Cron Scheduler | [Watch Demo](https://drive.google.com/file/d/1xJYPcTY7fkz-vwDJkEB3fS2sr14gOlOJ/view?usp=sharing) |
 
@@ -39,7 +39,7 @@ A collection of 21 automation, AI, and data projects showcasing workflow automat
 | 14 | [Slack to Trello Deal Tracker](./slack-trello-deal-tracker) | n8n, Slack API, Trello API | [Watch Demo](https://drive.google.com/file/d/1Yd6vca5fqWAfbbEkyGrqt1Br7AZFNCL0/view?usp=sharing) |
 | 15 | [Trello & Sheets Deal Sync](./trello-sheets-deal-sync) | n8n, Slack, Trello, Google Sheets | [Watch Demo](https://drive.google.com/file/d/1D5VX31kTj_JCn32igpW3yF6aBoopLpVX/view?usp=sharing) |
 | 16 | [Trello to Slack Notifications](./trello-slack-notifications) | n8n, Trello Webhooks, Slack API | [Watch Demo](https://drive.google.com/file/d/1WKB0zlYVrAX3khPTDVEiUqFe2kWuU8Js/view?usp=sharing) |
-| 17 | [SWASH Booking Sync](./swash-booking-sync) | n8n, SWASH API, Google Calendar | [Watch Demo](https://drive.google.com/file/d/1gIUzDDw-aKExzZ1tfcmN5SxUHlMO3vnz/view?usp=sharing) |
+| 17 | [SWASH Booking Sync](./swash-booking-sync) | Zapier, SWASH API, Google Calendar | [Watch Demo](https://drive.google.com/file/d/1gIUzDDw-aKExzZ1tfcmN5SxUHlMO3vnz/view?usp=sharing) |
 | 18 | [Clover to Shopify & BigCommerce](./clover-shopify-bigcommerce-sync) | Zapier, Clover POS, Shopify, BigCommerce | [Watch Demo](https://drive.google.com/file/d/1PF1JfHXbyUZPVlspqVwkLHK0Tfe3OHpI/view?usp=sharing) |
 | 19 | [Shopify to NetSuite Item Creation](./shopify-netsuite-item-creation) | Zapier, Shopify API, NetSuite API | [Watch Demo](https://drive.google.com/file/d/1ci5mGviPMZTkJHwNjGsvZcpBaYe34S3O/view?usp=sharing) |
 
