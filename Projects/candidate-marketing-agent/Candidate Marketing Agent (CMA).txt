@@ -1,0 +1,71 @@
+● Candidate Marketing Agent & Bullhorn CRM Sync (CMA Agent)
+
+  This n8n workflow automates the entire candidate marketing process for recruitment agencies. The system takes
+  candidates marked as "MPC" (Most Placeable Candidate) in Bullhorn CRM, uses AI to research and identify suitable
+  companies within the candidate's commute radius, enriches company data through Apollo.io, pushes everything into
+  Bullhorn CRM, and generates personalized outreach emails—all without manual intervention.
+
+  The workflow starts by calling a sub-workflow to retrieve a fresh Bullhorn access token and REST URL. It then queries
+  the Bullhorn search API to fetch all candidates with the status "MPC". The search returns detailed candidate data
+  including name, occupation, company name, experience, degree list, education history (school, degree, major), primary
+  and secondary skills, notice period, date available, company exclusions, commute distance preference, headcount
+  preference, and full address with zip code. Candidates without a valid zip code are filtered out since location is
+  critical for the company matching process.
+
+  The candidate data is then processed through JavaScript code nodes that transform raw Bullhorn data into clean,
+  structured fields. Primary skills are converted to comma-separated strings. Education records are formatted with
+  school, degree, and major combined. Addresses are flattened into single-line strings. Null values are replaced with
+  empty strings for text fields while preserving nulls for numeric fields like experience and distance.
+
+  Each cleaned candidate record is passed to a sub-workflow named "Get companies from Claude (Subworkflow 1)". This
+  sub-workflow uses Claude AI (Haiku model) with web search enabled to conduct exhaustive geographic research. The AI
+  systematically searches through Tier 1, Tier 2, and Tier 3 locations within the candidate's commute radius to
+  identify suitable financial advisory firms. It cross-references multiple directories including Unbiased.co.uk,
+  VouchedFor, and Google Business listings. The AI verifies each firm's independence status, chartered status, headcount,
+  and awards before including them in the results.
+
+  The identified companies are then checked against Bullhorn CRM using a second sub-workflow named "Check Companies in
+  Bullhorn (Subworkflow 2)". This queries the Bullhorn ClientCorporation search endpoint to determine if a company
+  already exists in the system, preventing duplicate records.
+
+  For new companies, a third sub-workflow named "Push Company BullHorn (Subworkflow 3)" handles enrichment and creation.
+  It fetches detailed company information from Apollo.io including employee count, industry list, annual revenue,
+  description, and phone numbers. It also searches Apollo.io for senior contacts at the company—filtering by titles like
+  Director, CEO, Founder, Partner, Owner, Principal, and Managing Director. The enriched data is pushed to Bullhorn's
+  ClientCorporation endpoint with all relevant fields. Records are tagged with "Agent CMA" in custom fields for tracking.
+
+  Associated people are processed through two separate sub-workflows. "Push People in Bullhorn (Subworkflow 4)" handles
+  people enrichment using Apollo.io's people match endpoint, validates geographic data, maps country names to Bullhorn
+  country IDs using a comprehensive mapping table covering 190+ countries, and creates ClientContact records linked to
+  the parent company. "Push Contact Bullhorn (Subworkflow 5)" handles contact-specific records with similar location
+  validation and country code lookups using the RestCountries API for ISO code verification.
+
+  The final sub-workflow, "Outreach Message (Subworkflow 6)", generates personalized recruitment outreach emails using
+  Claude AI (Sonnet model). The AI receives candidate profile data alongside company details and generates emails that
+  include 2-3 specific firm facts such as awards, chartered status, and team size. The system enforces rules like
+  prohibiting location mentions for privacy and maintaining a professional tone. Generated emails are stored as notes in
+  Bullhorn linked to the candidate, and follow-up tasks are automatically created with next-day scheduling for the
+  assigned recruiter.
+
+  The authentication sub-workflow "Get-bullhorn-access-token" handles OAuth token retrieval for Bullhorn. It performs the
+  full OAuth2 flow—getting an authorization code, exchanging it for an access token, and logging into the REST API to
+  obtain a session token. This is called by multiple sub-workflows throughout the process.
+
+  The entire system is modular with 7 interconnected workflows. The main workflow handles candidate retrieval, data
+  cleaning, and orchestration. Six sub-workflows handle specific tasks: AI company research, Bullhorn duplicate checking,
+  company creation, people creation, contact creation, and outreach message generation. This architecture makes the
+  system maintainable, debuggable, and scalable.
+
+  Error handling is built into each step. The workflow validates data at multiple points—checking for empty zip codes,
+  validating geographic data before country lookups, and verifying candidate status before generating outreach. Failed
+  records are skipped without breaking the entire run.
+
+  This workflow eliminates hours of manual candidate marketing work. Recruiters no longer need to research companies near
+  a candidate, manually check CRM for duplicates, enter company and contact records, or draft personalized outreach
+  emails. One execution processes all MPC candidates end-to-end, with qualified companies, contacts, personalized emails,
+  and follow-up tasks appearing in Bullhorn ready for action.
+
+  Tech Stack: n8n, Claude AI (Haiku for research, Sonnet for email generation), Apollo.io API (company enrichment,
+  people search, people match), Bullhorn CRM REST API (candidates, companies, contacts, notes, tasks), RestCountries API
+  (country code validation), JavaScript (data cleaning, transformation, country mapping), Sub-workflows (modular
+  architecture), OAuth token management, HTTP Request nodes

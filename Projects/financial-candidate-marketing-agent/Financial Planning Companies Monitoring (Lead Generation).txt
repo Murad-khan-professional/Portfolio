@@ -1,0 +1,57 @@
+● Financial Planning Companies Monitor & Bullhorn CRM Sync (FCMA Agent)
+
+  This n8n workflow automates the entire lead generation and CRM data entry process for financial planning and wealth
+  management companies. The system is designed to find qualified companies based on specific criteria, enrich their
+  data, and push complete records into Bullhorn CRM along with associated contacts and people.
+
+  The workflow starts with a form trigger where users can apply multiple filters to narrow down the target companies.
+  Filter options include location (United Kingdom, Dubai), employee range (1-10, 11-20, 21-50, 51-100), industry tags
+  (Financial Services, Investment Management, Independent Financial Adviser, IFA, Financial Planning, Wealth
+  Management, FCA authorized, CASS compliant), and job titles (CEO, Managing Director, Senior Partner, Director,
+  Principal, Founder, Owner, Partner). Users can also set funding date ranges to target recently funded companies.
+
+  Once the form is submitted, the workflow concatenates all selected filter values and generates a hash. This hash is
+  stored in an n8n data table along with the current page number. This approach allows the workflow to track pagination
+   state across multiple runs, so if a session is interrupted or rate-limited, it can resume from the last processed
+  page instead of starting over.
+
+  The workflow then queries the Apollo.io API using the selected filters to fetch a list of matching companies. The
+  response includes company name, website URL, LinkedIn URL, Twitter URL, primary domain, raw address, organization ID,
+   phone number, and pagination details. Before processing, the workflow runs a JavaScript filter to exclude banks,
+  building societies, and large networks like St. James's Place and Openwork that do not fit the target profile.
+
+  For each valid company, the workflow calls a sub-workflow named "Push Company to Bullhorn CRM". This sub-workflow
+  first calls another sub-workflow to retrieve a fresh Bullhorn access token and REST URL. It then fetches detailed
+  company information from Apollo.io, including employee count, industry list, annual revenue, company description, and
+   sanitized phone numbers. The data is cleaned using JavaScript—addresses are formatted, special characters are
+  removed, and null values are handled. The workflow then makes a PUT request to Bullhorn's ClientCorporation endpoint
+  to create the company record with fields like name, company URL, status, description, employee count, industry list,
+  business sector, revenue notes, address, and phone number. Custom fields are used to tag the record as created by
+  "Agent FPCM" for tracking purposes.
+
+  After the company is created in Bullhorn, the workflow fetches associated people from Apollo.io based on the job
+  titles selected in the original form. Each person record is split out and processed individually. The workflow maps
+  fields like first name, last name, email, phone, job title, and LinkedIn URL. It then calls another sub-workflow
+  named "People Push in Bullhorn" which creates candidate or contact records in Bullhorn and links them to the parent
+  company using the company ID returned from the earlier step. A separate "Contact Push in Bullhorn" sub-workflow
+  handles contact-specific records if needed.
+
+  The authentication sub-workflow "Get-bullhorn-access-token" handles OAuth token retrieval for Bullhorn. It stores and
+   refreshes tokens as needed, returning the BhRestToken and REST URL to the calling workflows. This keeps
+  authentication centralized and avoids token expiry issues during long-running processes.
+
+  The entire system is modular. The main workflow handles form input, filtering, pagination, and orchestration.
+  Sub-workflows handle specific tasks like company creation, people creation, contact creation, and token management.
+  This makes the system easier to maintain, debug, and scale.
+
+  Error handling is built into each step. Failed API calls are logged, and the workflow skips problematic records
+  without breaking the entire run. Pagination state is saved after each page, so even if the workflow stops due to rate
+   limits or errors, the next run picks up from the correct page.
+
+  This workflow eliminates manual prospecting and data entry. Sales and recruitment teams no longer need to search for
+  companies, copy details, or manually enter records into Bullhorn. One form submission kicks off the entire process,
+  and qualified companies with their key contacts appear in the CRM ready for outreach.
+
+  Tech Stack: n8n, Apollo.io API, Bullhorn CRM REST API, JavaScript (data cleaning, filtering, validation), Hash-based
+  pagination tracking, n8n Data Tables (state management), Form triggers, Sub-workflows (modular architecture), OAuth
+  token management, HTTP Request nodes

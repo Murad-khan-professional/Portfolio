@@ -5,3 +5,6 @@ projects/Project-*/
 *.avi
 *.mov
 *.mkv
+
+# n8n workflow JSON files (kept locally, not on GitHub)
+Projects/**/*.json
