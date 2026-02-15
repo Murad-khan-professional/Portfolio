@@ -1,0 +1,1 @@
+This automation monitors HubSpot for deals that move to Closed Won and triggers an n8n workflow. The workflow collects deal details and automatically creates a new project in Linear using Linear’s API. It ensures consistent project setup and synchronizes sales-to-delivery handoff without manual data entry. All actions run through n8n, integrating HubSpot and Linear seamlessly.
